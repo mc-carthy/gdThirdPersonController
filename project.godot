@@ -8,14 +8,25 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://src/Main/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://src/Main/StateMachine/StateMachine.gd"
+} ]
 _global_script_class_icons={
-
+"State": "res://assets/2d/icons/state.svg",
+"StateMachine": "res://assets/2d/icons/state_machine.svg"
 }
 
 [application]
 
-config/name="Learn to Code a Pro 3D Character with Godot (start)"
+config/name="Gd Third Person Controller"
 run/main_scene="res://src/Main/Game.tscn"
 config/icon="res://icon.png"
 
