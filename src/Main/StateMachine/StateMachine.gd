@@ -8,6 +8,7 @@ export var initial_state: NodePath = NodePath()
 
 onready var state: State = get_node(initial_state) setget set_state
 
+var is_active: bool = true setget set_is_active
 var _state_name: String = ''
 
 func _init() -> void:
@@ -33,6 +34,13 @@ func transition_to(target_state_path: String, msg: Dictionary = {}) -> void:
 	self.state = target_state
 	state.enter(msg)
 	emit_signal('transitioned', target_state_path)
+
+func set_is_active(value: bool) -> void:
+	is_active = value
+	set_process(value)
+	set_physics_process(value)
+	set_process_unhandled_input(value)
+	state.is_active = value
 
 func set_state(value: State) -> void:
 	state = value

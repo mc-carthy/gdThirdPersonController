@@ -4,6 +4,7 @@ class_name State, 'res://assets/2d/icons/state.svg'
 
 onready var _state_machine:= _get_state_machine(self)
 
+var is_active: bool = true setget set_is_active
 var _parent: State = null
 
 func _ready() -> void:
@@ -31,3 +32,7 @@ func _get_state_machine(node: Node) -> Node:
 	if node != null and not node.is_in_group('state_machine'):
 		return _get_state_machine(node.get_parent())
 	return node
+
+func set_is_active(value: bool) -> void:
+	is_active = value
+	set_block_signals(not value)

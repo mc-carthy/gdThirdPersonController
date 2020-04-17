@@ -1,3 +1,10 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 
 [node name="Game" type="Node"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.902773, 0.430117, 0, -0.430117, 0.902773, 0, 2.57487, 3.13437 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
