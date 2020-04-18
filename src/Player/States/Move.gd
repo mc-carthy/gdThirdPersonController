@@ -1,2 +1,39 @@
 extends PlayerState
 
+export var maximum_speed: float = 15.0
+export var move_speed: float = 15.0
+export var gravity: float = -80.0
+export var jump_impulse: float = 25.0
+
+var velocity: Vector3 = Vector3.ZERO
+
+func physics_process(delta: float) -> void:
+	var input_direction: Vector3 = get_input_direction()
+	
+	var move_direction: Vector3 = input_direction
+	if move_direction.length() > 1.0:
+		move_direction = move_direction.normalized()
+	move_direction.y = 0
+	
+	if move_direction:
+		player.look_at(player.global_transform.origin + move_direction, Vector3.UP)
+	
+	velocity = calculate_velocity(velocity, move_direction, delta)
+	velocity = player.move_and_slide(velocity, Vector3.UP)
+
+static func get_input_direction() -> Vector3:
+	return Vector3(
+		Input.get_action_strength('move_right') - Input.get_action_strength('move_left'),
+		0.0,
+		Input.get_action_strength('move_backward') - Input.get_action_strength('move_forward')
+	)
+
+func calculate_velocity(current_velocity: Vector3, move_direction: Vector3, delta: float) -> Vector3:
+	var new_velocity: Vector3 = current_velocity
+	
+	new_velocity = move_direction * move_speed * delta
+	if new_velocity.length() > maximum_speed:
+		new_velocity = new_velocity.normalized() * maximum_speed
+	new_velocity.y = current_velocity.y + gravity * delta
+	
+	return new_velocity
