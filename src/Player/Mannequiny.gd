@@ -14,7 +14,7 @@ func transition_to(state_id: int) -> void:
 	match state_id:
 		States.IDLE:
 			_playback.travel('idle')
-		States.Run:
+		States.RUN:
 			_playback.travel('run')
 		_:
 			_playback.travel('idle')
