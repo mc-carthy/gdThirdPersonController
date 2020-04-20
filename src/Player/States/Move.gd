@@ -18,6 +18,7 @@ func physics_process(delta: float) -> void:
 	if move_direction.length() > 1.0:
 		move_direction = move_direction.normalized()
 	move_direction.y = 0
+	skin.move_direction = move_direction
 	
 	if move_direction:
 		player.look_at(player.global_transform.origin + move_direction, Vector3.UP)
