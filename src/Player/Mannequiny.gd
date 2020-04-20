@@ -16,5 +16,7 @@ func transition_to(state_id: int) -> void:
 			_playback.travel('idle')
 		States.RUN:
 			_playback.travel('run')
+		States.AIR:
+			_playback.travel('air_jump')
 		_:
 			_playback.travel('idle')

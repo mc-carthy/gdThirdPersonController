@@ -7,6 +7,10 @@ export var jump_impulse: float = 25.0
 
 var velocity: Vector3 = Vector3.ZERO
 
+func unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed('jump'):
+		_state_machine.transition_to('Move/Air', { velocity = velocity, jump_impulse = jump_impulse })
+
 func physics_process(delta: float) -> void:
 	var input_direction: Vector3 = get_input_direction()
 	
