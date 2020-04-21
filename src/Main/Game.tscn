@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Level/Playground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/3d/level/level_environment.tres" type="Environment" id=3]
+[ext_resource path="res://src/Main/Game.gd" type="Script" id=4]
 
 [sub_resource type="PlaneMesh" id=2]
 size = Vector2( 50, 50 )
@@ -11,6 +12,7 @@ size = Vector2( 50, 50 )
 extents = Vector3( 25, 0.1, 25 )
 
 [node name="Game" type="Node"]
+script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.295686, 0 )
