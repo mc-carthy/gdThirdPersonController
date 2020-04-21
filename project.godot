@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Spatial",
+"class": "CameraRig",
+"language": "GDScript",
+"path": "res://src/Player/Camera/CameraRig.gd"
+}, {
+"base": "State",
+"class": "CameraState",
+"language": "GDScript",
+"path": "res://src/Player/Camera/CameraState.gd"
+}, {
+"base": "Spatial",
 "class": "Mannequiny",
 "language": "GDScript",
 "path": "res://src/Player/Mannequiny.gd"
@@ -35,6 +45,8 @@ _global_script_classes=[ {
 "path": "res://src/Main/StateMachine/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"CameraRig": "",
+"CameraState": "",
 "Mannequiny": "",
 "Player": "",
 "PlayerState": "",

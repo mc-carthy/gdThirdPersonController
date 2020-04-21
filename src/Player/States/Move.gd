@@ -13,8 +13,9 @@ func unhandled_input(event: InputEvent) -> void:
 
 func physics_process(delta: float) -> void:
 	var input_direction: Vector3 = get_input_direction()
-	
-	var move_direction: Vector3 = input_direction
+	var forward: Vector3 = player.camera.global_transform.basis.z * input_direction.z
+	var right: Vector3 = player.camera.global_transform.basis.x * input_direction.x
+	var move_direction: Vector3 = forward + right
 	if move_direction.length() > 1.0:
 		move_direction = move_direction.normalized()
 	move_direction.y = 0

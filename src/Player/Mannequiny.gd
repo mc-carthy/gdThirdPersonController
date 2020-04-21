@@ -25,4 +25,4 @@ func transition_to(state_id: int) -> void:
 
 func set_move_direction(value: Vector3) -> void:
 	move_direction = value
-	animation_tree['parameters/move_ground/blend_position'] = direction.length()
+	animation_tree['parameters/move_ground/blend_position'] = move_direction.length()
