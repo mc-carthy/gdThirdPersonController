@@ -1,6 +1,8 @@
 extends CameraState
 
-export var y_inverted: bool = false
+const ZOOM_STEP: float = 0.1
+
+export var y_inverted: bool = true
 export var deadzone_backwards: float = 0.3
 export var sensitivity_gamepad: Vector2 = Vector2(2.5, 2.5)
 export var sensitivity_mouse: Vector2 = Vector2(0.1, 0.1)
@@ -10,8 +12,13 @@ var _input_relative: Vector2 = Vector2.ZERO
 var _is_aiming: bool = false
 
 func unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if event.is_action_pressed('zoom_in'):
+		camera_rig.zoom += ZOOM_STEP
+	elif event.is_action_pressed('zoom_out'):
+		camera_rig.zoom -= ZOOM_STEP
+	elif event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_input_relative += event.get_relative()
+	
 
 func process(delta: float) -> void:
 	camera_rig.global_transform.origin = camera_rig.player.global_transform.origin + camera_rig._position_start
@@ -20,7 +27,7 @@ func process(delta: float) -> void:
 	var move_direction: Vector3 = get_move_direction()
 	
 	if _input_relative.length() > 0.0:
-		update_rotation(look_direction * sensitivity_mouse * delta)
+		update_rotation(_input_relative * sensitivity_mouse * delta)
 		_input_relative = Vector2.ZERO
 	if look_direction.length() > 0.0:
 		update_rotation(look_direction * sensitivity_gamepad * delta)

@@ -5,6 +5,7 @@ extends Spatial
 class_name CameraRig
 
 var player: KinematicBody
+var zoom: float = 0.5 setget set_zoom
 
 onready var _position_start: Vector3 = translation
 onready var spring_arm: SpringArm = $SpringArm
@@ -19,3 +20,7 @@ func _ready() -> void:
 
 func _get_configuration_warning() -> String:
 	return 'Missing player node' if not player else ''
+
+func set_zoom(value: float) -> void:
+	zoom = clamp(value, 0, 1)
+	spring_arm.zoom = zoom
