@@ -1,13 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Player/Camera/CameraRig.gd" type="Script" id=1]
 [ext_resource path="res://src/Main/StateMachine/StateMachine.gd" type="Script" id=2]
 [ext_resource path="res://src/Player/Camera/States/Camera.gd" type="Script" id=3]
 [ext_resource path="res://src/Player/Camera/States/Default.gd" type="Script" id=4]
 [ext_resource path="res://src/Player/Camera/States/Aim.gd" type="Script" id=5]
+[ext_resource path="res://assets/2d/reticle.png" type="Texture" id=6]
+[ext_resource path="res://src/Player/Camera/AimTarget.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 0.5
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+params_blend_mode = 1
 
 [node name="CameraRig" type="Spatial"]
 script = ExtResource( 1 )
@@ -18,6 +24,10 @@ target = NodePath("../SpringArm/CameraTarget")
 speed = 7.0
 enabled = true
 
+[node name="AimRay" type="RayCast" parent="InterpolatedCamera"]
+cast_to = Vector3( 0, 0, -20 )
+collision_mask = 2
+
 [node name="SpringArm" type="SpringArm" parent="."]
 collision_mask = 2
 shape = SubResource( 1 )
@@ -25,6 +35,14 @@ spring_length = 5.0
 
 [node name="CameraTarget" type="Position3D" parent="SpringArm"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+
+[node name="AimTarget" type="Sprite3D" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+visible = false
+material_override = SubResource( 2 )
+cast_shadow = 0
+texture = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -38,5 +56,6 @@ script = ExtResource( 4 )
 
 [node name="Aim" type="Node" parent="StateMachine/Camera"]
 script = ExtResource( 5 )
+offset_camera = Vector3( 0.75, -1.5, 0 )
 
 [node name="Tween" type="Tween" parent="StateMachine/Camera/Aim"]
