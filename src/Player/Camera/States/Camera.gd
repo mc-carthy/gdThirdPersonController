@@ -4,6 +4,7 @@ export var y_inverted: bool = false
 export var deadzone_backwards: float = 0.3
 export var sensitivity_gamepad: Vector2 = Vector2(2.5, 2.5)
 export var sensitivity_mouse: Vector2 = Vector2(0.1, 0.1)
+export var fov_default: float = 70.0
 
 var _input_relative: Vector2 = Vector2.ZERO
 

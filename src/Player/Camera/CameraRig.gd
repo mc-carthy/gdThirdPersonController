@@ -7,6 +7,8 @@ class_name CameraRig
 var player: KinematicBody
 
 onready var _position_start: Vector3 = translation
+onready var spring_arm: SpringArm = $SpringArm
+onready var camera: InterpolatedCamera = $InterpolatedCamera
 
 func _ready() -> void:
 	set_as_toplevel(true)
