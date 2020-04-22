@@ -7,6 +7,7 @@ export var sensitivity_mouse: Vector2 = Vector2(0.1, 0.1)
 export var fov_default: float = 70.0
 
 var _input_relative: Vector2 = Vector2.ZERO
+var _is_aiming: bool = false
 
 func unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -28,7 +29,7 @@ func process(delta: float) -> void:
 		move_direction.x >= -deadzone_backwards and move_direction.x <= deadzone_backwards	
 	)
 	
-	if not is_in_deadzone:
+	if not is_in_deadzone and not _is_aiming:
 		auto_rotate(move_direction)
 	
 	camera_rig.rotation.y = wrapf(camera_rig.rotation.y, -PI, PI)
